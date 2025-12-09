@@ -1,9 +1,9 @@
 # GitHub Retrospective 2025 - Implementation Plan
 
-## Step 1: MongoDB Setup & Schema
-- [ ] Install MongoDB driver (`mongodb`)
-- [ ] Create database connection utility (`lib/mongodb.ts`)
-- [ ] Define GitHubUser schema with fields:
+## Step 1: MongoDB Setup & Schema ✅
+- [x] Install MongoDB driver (`mongodb`)
+- [x] Create database connection utility (`lib/mongodb.ts`)
+- [x] Define GitHubUser schema with fields (`lib/types/github-user.ts`):
   - `username` (string, unique)
   - `fetchedAt` (Date)
   - `metrics`:
@@ -18,11 +18,13 @@
     - `codeReviewComments` (number)
     - `starsReceived` (number)
     - `topRepos` (array of most active repos)
-    - `firstCommit` ({ date, repo, message })
-    - `lastCommit` ({ date, repo, message })
-- [ ] Create mock data JSON for testing
+    - `firstCommit` ({ date, repo, message, url })
+    - `lastCommit` ({ date, repo, message, url })
+- [x] Create mock data JSON for testing (`mock-data.json`)
+- [x] Create server action to fetch user (`app/actions/user.ts`)
+- [x] Test MongoDB connection with mock data
 
-**Checkpoint: Review schema before proceeding**
+**Checkpoint: ✅ Schema reviewed and tested**
 
 ---
 
