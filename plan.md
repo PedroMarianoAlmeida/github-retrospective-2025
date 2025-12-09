@@ -28,16 +28,16 @@
 
 ---
 
-## Step 2: Initial Page with Username Input
-- [ ] Install shadcn/ui and configure
-- [ ] Create landing page with:
+## Step 2: Initial Page with Username Input ✅
+- [x] Install shadcn/ui and configure
+- [x] Create landing page with:
   - Hero section with title/description
   - Username input form
   - Submit button
-- [ ] Create server action to handle form submission
-- [ ] Add loading state
+- [x] Create server action to handle form submission
+- [x] Add loading state
 
-**Checkpoint: Review UI before proceeding**
+**Checkpoint: ✅ UI reviewed and ready**
 
 ---
 
