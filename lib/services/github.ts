@@ -4,6 +4,8 @@ import {
   Language,
   TopRepo,
   CommitInfo,
+  ContributionWeek,
+  ContributionDay,
 } from "@/lib/types/github-user";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -21,15 +23,6 @@ const graphqlWithAuth = graphql.defaults({
 // Year boundaries for 2025
 const YEAR_START = "2025-01-01T00:00:00Z";
 const YEAR_END = "2025-12-31T23:59:59Z";
-
-interface ContributionDay {
-  contributionCount: number;
-  date: string;
-}
-
-interface ContributionWeek {
-  contributionDays: ContributionDay[];
-}
 
 interface Repository {
   name: string;
@@ -406,11 +399,12 @@ export async function fetchGitHubMetrics(
   const { first: firstCommit, last: lastCommit } =
     await fetchFirstAndLastCommits(username);
 
+  const calendarWeeks = contributions.contributionCalendar.weeks;
+
   const metrics: GitHubMetrics = {
     totalCommits: contributions.totalCommitContributions,
-    longestStreak: calculateLongestStreak(
-      contributions.contributionCalendar.weeks
-    ),
+    longestStreak: calculateLongestStreak(calendarWeeks),
+    contributionCalendar: calendarWeeks as ContributionWeek[],
     reposCreated: countReposCreatedIn2025(user.repositories.nodes),
     reposContributed: user.repositoriesContributedTo.totalCount,
     reposForked: countForkedRepos(user.repositories.nodes),

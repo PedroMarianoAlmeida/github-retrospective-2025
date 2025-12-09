@@ -21,9 +21,19 @@ export interface CommitInfo {
   url: string;
 }
 
+export interface ContributionDay {
+  date: string;
+  contributionCount: number;
+}
+
+export interface ContributionWeek {
+  contributionDays: ContributionDay[];
+}
+
 export interface GitHubMetrics {
   totalCommits: number;
   longestStreak: number;
+  contributionCalendar: ContributionWeek[];
   reposCreated: number;
   reposContributed: number;
   reposForked: number;

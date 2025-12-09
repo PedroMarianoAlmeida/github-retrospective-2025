@@ -17,8 +17,8 @@ export const STEPS = [
   { slug: "first-commit", label: "First Commit" },
   { slug: "total-commits", label: "Total Commits" },
   { slug: "top-repositories", label: "Top Repositories" },
+  { slug: "streak", label: "Coding Streak" },
   // Future steps will be added here:
-  // { slug: "streak", label: "Coding Streak" },
   // { slug: "languages", label: "Languages" },
   // { slug: "community", label: "Community Impact" },
   // { slug: "summary", label: "Summary" },

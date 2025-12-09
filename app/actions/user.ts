@@ -59,10 +59,15 @@ export async function upsertUser(
   };
 }
 
-function isDataFresh(fetchedAt: Date): boolean {
+function isDataFresh(user: GitHubUser): boolean {
   const now = new Date();
-  const age = now.getTime() - new Date(fetchedAt).getTime();
-  return age < CACHE_DURATION_MS;
+  const age = now.getTime() - new Date(user.fetchedAt).getTime();
+  const notExpired = age < CACHE_DURATION_MS;
+
+  // Also check if we have all required fields (e.g., contributionCalendar)
+  const hasAllFields = user.metrics.contributionCalendar !== undefined;
+
+  return notExpired && hasAllFields;
 }
 
 export type LookupUserResult =
@@ -105,7 +110,7 @@ export async function lookupUser(username: string): Promise<LookupUserResult> {
     // Check if we have cached data that's still fresh
     const cachedUser = await getUserByUsername(trimmedUsername);
 
-    if (cachedUser && isDataFresh(cachedUser.fetchedAt)) {
+    if (cachedUser && isDataFresh(cachedUser)) {
       console.log(`Using cached data for ${trimmedUsername}`);
       return { success: true, user: cachedUser };
     }

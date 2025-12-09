@@ -108,12 +108,14 @@ Use Decrypted Text
 
 - [x] Top repos by activity
 
-### Step 5d: Coding Streak
+### Step 5d: Coding Streak ✅
 
 Use Count Up react bits component
 
-- [ ] Longest consecutive days
-- [ ] Calendar visualization
+- [x] Longest consecutive days
+- [x] Calendar visualization
+
+**Route:** `/retrospective/[username]/streak`
 
 ### Step 5e: Languages
 
