@@ -69,6 +69,25 @@ export type LookupUserResult =
   | { success: true; user: GitHubUser }
   | { success: false; error: string };
 
+export async function getAverageCommits(): Promise<number> {
+  const db = await getDatabase();
+  const collection = db.collection<GitHubUser>("gitHubUser");
+
+  const result = await collection
+    .aggregate<{ avgCommits: number }>([
+      {
+        $group: {
+          _id: null,
+          avgCommits: { $avg: "$metrics.totalCommits" },
+        },
+      },
+    ])
+    .toArray();
+
+  // Return 0 if no users exist yet
+  return result[0]?.avgCommits ?? 0;
+}
+
 export async function lookupUser(username: string): Promise<LookupUserResult> {
   const trimmedUsername = username.trim().toLowerCase();
 

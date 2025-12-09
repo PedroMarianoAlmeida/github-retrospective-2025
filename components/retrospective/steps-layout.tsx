@@ -15,8 +15,8 @@ const STORAGE_KEY = "github-retrospective-user";
 // Define all steps with their routes
 export const STEPS = [
   { slug: "first-commit", label: "First Commit" },
+  { slug: "total-commits", label: "Total Commits" },
   // Future steps will be added here:
-  // { slug: "total-commits", label: "Total Commits" },
   // { slug: "streak", label: "Coding Streak" },
   // { slug: "repositories", label: "Repositories" },
   // { slug: "languages", label: "Languages" },

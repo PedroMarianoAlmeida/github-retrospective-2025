@@ -90,11 +90,13 @@ Message: I was a long journey this year, do you remember your first commit?: <fi
 
 **Route:** `/retrospective/[username]/first-commit`
 
-### Step 5b: Total Commits
+### Step 5b: Total Commits ✅
 Use Count Up react bits component
-- [ ] Animated counter
-- [ ] Comparison with average user
+- [x] Animated counter
+- [x] Comparison with average user (dynamic from database)
 Message: Since there you create more <total commits> commits
+
+**Route:** `/retrospective/[username]/total-commits`
 
 ### Step 5b: Coding Streak
 
