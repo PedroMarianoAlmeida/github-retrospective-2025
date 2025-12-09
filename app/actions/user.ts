@@ -102,6 +102,12 @@ export interface AverageStats {
   userCount: number;
 }
 
+export async function getTotalUserCount(): Promise<number> {
+  const db = await getDatabase();
+  const collection = db.collection<GitHubUser>("gitHubUser");
+  return collection.countDocuments();
+}
+
 export async function getAverageStats(): Promise<AverageStats> {
   const db = await getDatabase();
   const collection = db.collection<GitHubUser>("gitHubUser");

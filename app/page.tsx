@@ -1,6 +1,9 @@
 import { UsernameForm } from "@/components/username-form";
+import { UserCounter } from "@/components/user-counter";
+import { getTotalUserCount } from "@/app/actions/user";
 
-export default function Home() {
+export default async function Home() {
+  const userCount = await getTotalUserCount();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
       <main className="flex w-full max-w-md flex-col items-center gap-8 text-center">
@@ -30,6 +33,8 @@ export default function Home() {
         <p className="text-sm text-muted-foreground">
           Enter your GitHub username to see your year in review
         </p>
+
+        <UserCounter count={userCount} />
       </main>
     </div>
   );
