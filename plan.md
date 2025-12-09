@@ -117,10 +117,12 @@ Use Count Up react bits component
 
 **Route:** `/retrospective/[username]/streak`
 
-### Step 5e: Languages
+### Step 5e: Languages ✅
 
-- [ ] Language breakdown chart
-- [ ] Most used language highlight
+- [x] Language breakdown chart
+- [x] Most used language highlight
+
+**Route:** `/retrospective/[username]/languages`
 
 ### Step 5f: Community Impact
 
