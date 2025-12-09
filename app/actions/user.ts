@@ -1,5 +1,6 @@
 "use server";
 
+import { unstable_cache } from "next/cache";
 import { getDatabase } from "@/lib/mongodb";
 import { GitHubUser, GitHubMetrics } from "@/lib/types/github-user";
 import {
@@ -102,11 +103,15 @@ export interface AverageStats {
   userCount: number;
 }
 
-export async function getTotalUserCount(): Promise<number> {
-  const db = await getDatabase();
-  const collection = db.collection<GitHubUser>("gitHubUser");
-  return collection.countDocuments();
-}
+export const getTotalUserCount = unstable_cache(
+  async (): Promise<number> => {
+    const db = await getDatabase();
+    const collection = db.collection<GitHubUser>("gitHubUser");
+    return collection.countDocuments();
+  },
+  ["total-user-count"],
+  { revalidate: 300 } // Cache for 5 minutes (300 seconds)
+);
 
 export async function getAverageStats(): Promise<AverageStats> {
   const db = await getDatabase();
