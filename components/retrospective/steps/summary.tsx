@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
   GitCommit,
@@ -11,6 +13,10 @@ import {
   TrendingDown,
   Minus,
   Award,
+  Share2,
+  Github,
+  RotateCcw,
+  Check,
 } from "lucide-react";
 import { GitHubUser } from "@/lib/types/github-user";
 import { AverageStats } from "@/app/actions/user";
@@ -20,6 +26,8 @@ interface SummaryStepProps {
   user: GitHubUser;
   averageStats: AverageStats;
 }
+
+const GITHUB_REPO_URL = "https://github.com/PedroMarianoAlmeida/github-retrospective-2025";
 
 interface ComparisonStatProps {
   icon: React.ReactNode;
@@ -140,6 +148,21 @@ function getYearSummary(user: GitHubUser): { title: string; message: string } {
 export function SummaryStep({ user, averageStats }: SummaryStepProps) {
   const { title, message } = getYearSummary(user);
   const { metrics } = user;
+  const [copied, setCopied] = useState(false);
+
+  const shareUrl = typeof window !== "undefined"
+    ? `${window.location.origin}/retrospective/${user.username}/share`
+    : `/retrospective/${user.username}/share`;
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
 
   return (
     <div className="space-y-8 py-4">
@@ -225,12 +248,54 @@ export function SummaryStep({ user, averageStats }: SummaryStepProps) {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ delay: 1.6 }}
           className="text-center text-xs text-muted-foreground/70"
         >
           Compared with {averageStats.userCount} developers who used this app
         </motion.p>
       )}
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.8 }}
+        className="flex flex-col gap-3 pt-4"
+      >
+        <button
+          onClick={handleCopyLink}
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-3 font-medium transition-colors hover:bg-muted"
+        >
+          {copied ? (
+            <>
+              <Check className="h-5 w-5 text-green-500" />
+              Link Copied!
+            </>
+          ) : (
+            <>
+              <Share2 className="h-5 w-5" />
+              Share Your Results
+            </>
+          )}
+        </button>
+
+        <a
+          href={GITHUB_REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-3 font-medium transition-colors hover:bg-muted"
+        >
+          <Github className="h-5 w-5" />
+          Star on GitHub
+        </a>
+
+        <Link
+          href="/"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-3 font-medium transition-colors hover:bg-muted"
+        >
+          <RotateCcw className="h-5 w-5" />
+          Start Again
+        </Link>
+      </motion.div>
     </div>
   );
 }

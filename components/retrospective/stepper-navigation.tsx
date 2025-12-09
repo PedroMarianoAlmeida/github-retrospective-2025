@@ -66,27 +66,29 @@ export function StepperNavigation({
           <div className="px-2">{children}</div>
         </div>
 
-        {/* Navigation buttons */}
-        <div className="px-8 pb-8">
-          <div
-            className={`mt-10 flex ${currentStep !== 1 ? "justify-between" : "justify-end"}`}
-          >
-            {currentStep !== 1 && (
-              <button
-                onClick={handleBack}
-                className="duration-350 rounded px-2 py-1 text-muted-foreground transition hover:text-foreground"
-              >
-                {backButtonText}
-              </button>
-            )}
-            <button
-              onClick={handleNext}
-              className="duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-primary-foreground transition hover:bg-primary/90 active:bg-primary/80"
+        {/* Navigation buttons - hidden on last step since summary has its own actions */}
+        {!isLastStep && (
+          <div className="px-8 pb-8">
+            <div
+              className={`mt-10 flex ${currentStep !== 1 ? "justify-between" : "justify-end"}`}
             >
-              {isLastStep ? "Complete" : nextButtonText}
-            </button>
+              {currentStep !== 1 && (
+                <button
+                  onClick={handleBack}
+                  className="duration-350 rounded px-2 py-1 text-muted-foreground transition hover:text-foreground"
+                >
+                  {backButtonText}
+                </button>
+              )}
+              <button
+                onClick={handleNext}
+                className="duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-primary-foreground transition hover:bg-primary/90 active:bg-primary/80"
+              >
+                {nextButtonText}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

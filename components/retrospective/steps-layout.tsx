@@ -17,7 +17,6 @@ export const STEPS = [
   { slug: "languages", label: "Languages" },
   { slug: "community", label: "Community Impact" },
   { slug: "summary", label: "Summary" },
-  { slug: "share", label: "Share" },
 ] as const;
 
 export type StepSlug = (typeof STEPS)[number]["slug"];
@@ -39,8 +38,8 @@ export function StepsLayout({ children, username }: StepsLayoutProps) {
   };
 
   const handleComplete = () => {
-    // Navigate to home after completion
-    router.push("/");
+    // Navigate to share page after completion
+    router.push(`/retrospective/${username}/share`);
   };
 
   return (
