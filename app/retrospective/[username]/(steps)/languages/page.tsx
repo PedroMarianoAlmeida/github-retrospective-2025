@@ -1,4 +1,4 @@
-import { getUserByUsername } from "@/app/actions/user";
+import { getOrFetchUser } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { LanguagesStep } from "@/components/retrospective/steps/languages";
 
@@ -8,7 +8,7 @@ interface LanguagesPageProps {
 
 export default async function LanguagesPage({ params }: LanguagesPageProps) {
   const { username } = await params;
-  const user = await getUserByUsername(username);
+  const user = await getOrFetchUser(username);
 
   if (!user) {
     notFound();

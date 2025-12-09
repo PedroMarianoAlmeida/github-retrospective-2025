@@ -141,6 +141,60 @@ export async function getAverageStats(): Promise<AverageStats> {
   };
 }
 
+/**
+ * Get user from database, or fetch from GitHub if not found.
+ * Use this in step pages to ensure users can access any step directly via URL.
+ */
+export async function getOrFetchUser(
+  username: string
+): Promise<GitHubUser | null> {
+  const trimmedUsername = username.trim().toLowerCase();
+
+  if (!trimmedUsername) {
+    return null;
+  }
+
+  // Validate username format
+  const usernameRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+  if (!usernameRegex.test(trimmedUsername)) {
+    return null;
+  }
+
+  // Check if we have cached data that's still fresh
+  const cachedUser = await getUserByUsername(trimmedUsername);
+
+  if (cachedUser && isDataFresh(cachedUser)) {
+    return cachedUser;
+  }
+
+  try {
+    // Check if user exists on GitHub
+    const userExists = await checkUserExists(trimmedUsername);
+    if (!userExists) {
+      return null;
+    }
+
+    // Fetch fresh data from GitHub
+    console.log(`Fetching fresh data for ${trimmedUsername}`);
+    const metrics = await fetchGitHubMetrics(trimmedUsername);
+
+    // Save to database
+    const user = await upsertUser(trimmedUsername, metrics);
+
+    return user;
+  } catch (error) {
+    console.error("Error fetching user from GitHub:", error);
+
+    // If we have stale cached data, return it as a fallback
+    if (cachedUser) {
+      console.log(`Returning stale cached data for ${trimmedUsername} due to error`);
+      return cachedUser;
+    }
+
+    return null;
+  }
+}
+
 export async function lookupUser(username: string): Promise<LookupUserResult> {
   const trimmedUsername = username.trim().toLowerCase();
 

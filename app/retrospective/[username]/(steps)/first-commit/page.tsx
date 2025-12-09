@@ -1,4 +1,4 @@
-import { getUserByUsername } from "@/app/actions/user";
+import { getOrFetchUser } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { FirstLastCommitStep } from "@/components/retrospective/steps/first-last-commit";
 
@@ -10,7 +10,7 @@ export default async function FirstCommitPage({
   params,
 }: FirstCommitPageProps) {
   const { username } = await params;
-  const user = await getUserByUsername(username);
+  const user = await getOrFetchUser(username);
 
   if (!user) {
     notFound();

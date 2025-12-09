@@ -1,4 +1,4 @@
-import { getUserByUsername } from "@/app/actions/user";
+import { getOrFetchUser } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { TopRepositoriesStep } from "@/components/retrospective/steps/top-repositories";
 
@@ -10,7 +10,7 @@ export default async function TopRepositoriesPage({
   params,
 }: TopRepositoriesPageProps) {
   const { username } = await params;
-  const user = await getUserByUsername(username);
+  const user = await getOrFetchUser(username);
 
   if (!user) {
     notFound();

@@ -1,4 +1,4 @@
-import { getUserByUsername, getAverageCommits } from "@/app/actions/user";
+import { getOrFetchUser, getAverageCommits } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { TotalCommitsStep } from "@/components/retrospective/steps/total-commits";
 
@@ -11,7 +11,7 @@ export default async function TotalCommitsPage({
 }: TotalCommitsPageProps) {
   const { username } = await params;
   const [user, averageCommits] = await Promise.all([
-    getUserByUsername(username),
+    getOrFetchUser(username),
     getAverageCommits(),
   ]);
 

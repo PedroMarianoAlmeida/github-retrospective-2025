@@ -1,4 +1,4 @@
-import { getUserByUsername } from "@/app/actions/user";
+import { getOrFetchUser } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { CodingStreakStep } from "@/components/retrospective/steps/coding-streak";
 
@@ -8,7 +8,7 @@ interface StreakPageProps {
 
 export default async function StreakPage({ params }: StreakPageProps) {
   const { username } = await params;
-  const user = await getUserByUsername(username);
+  const user = await getOrFetchUser(username);
 
   if (!user) {
     notFound();

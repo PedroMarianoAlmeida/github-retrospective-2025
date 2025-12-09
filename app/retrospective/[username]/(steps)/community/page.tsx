@@ -1,4 +1,4 @@
-import { getUserByUsername } from "@/app/actions/user";
+import { getOrFetchUser } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { CommunityImpactStep } from "@/components/retrospective/steps/community-impact";
 
@@ -8,7 +8,7 @@ interface CommunityPageProps {
 
 export default async function CommunityPage({ params }: CommunityPageProps) {
   const { username } = await params;
-  const user = await getUserByUsername(username);
+  const user = await getOrFetchUser(username);
 
   if (!user) {
     notFound();

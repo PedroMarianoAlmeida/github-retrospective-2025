@@ -1,4 +1,4 @@
-import { getUserByUsername, getAverageStats } from "@/app/actions/user";
+import { getOrFetchUser, getAverageStats } from "@/app/actions/user";
 import { notFound } from "next/navigation";
 import { SummaryStep } from "@/components/retrospective/steps/summary";
 
@@ -9,7 +9,7 @@ interface SummaryPageProps {
 export default async function SummaryPage({ params }: SummaryPageProps) {
   const { username } = await params;
   const [user, averageStats] = await Promise.all([
-    getUserByUsername(username),
+    getOrFetchUser(username),
     getAverageStats(),
   ]);
 
