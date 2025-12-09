@@ -102,13 +102,11 @@ Use Count Up react bits component
 
 **Route:** `/retrospective/[username]/total-commits`
 
-### Step 5c: Top Repositories
+### Step 5c: Top Repositories ✅
 
 Use Decrypted Text
 
-- [ ] Top repos by activity
-
-### Step 5c: Top Repositories
+- [x] Top repos by activity
 
 ### Step 5d: Coding Streak
 

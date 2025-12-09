@@ -139,6 +139,15 @@ export function FirstLastCommitStep({
           </div>
         </motion.div>
       )}
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1 }}
+        className="text-center text-xs text-muted-foreground/70"
+      >
+        Based on public repository activity only
+      </motion.p>
     </div>
   );
 }
