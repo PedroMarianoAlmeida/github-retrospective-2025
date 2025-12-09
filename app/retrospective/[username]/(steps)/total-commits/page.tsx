@@ -19,9 +19,15 @@ export default async function TotalCommitsPage({
     notFound();
   }
 
+  const totalRepos =
+    user.metrics.reposCreated +
+    user.metrics.reposContributed +
+    user.metrics.reposForked;
+
   return (
     <TotalCommitsStep
       totalCommits={user.metrics.totalCommits}
+      totalRepos={totalRepos}
       username={user.username}
       averageCommits={Math.round(averageCommits)}
     />

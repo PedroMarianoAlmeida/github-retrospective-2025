@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "motion/react";
-import { GitCommit, TrendingUp, Users } from "lucide-react";
+import { GitCommit, TrendingUp, Users, FolderGit2 } from "lucide-react";
 import { CountUp } from "@/components/ui/count-up";
 
 interface TotalCommitsStepProps {
   totalCommits: number;
+  totalRepos: number;
   username: string;
   averageCommits: number;
 }
@@ -56,6 +57,7 @@ function getCommitComparison(
 
 export function TotalCommitsStep({
   totalCommits,
+  totalRepos,
   username,
   averageCommits,
 }: TotalCommitsStepProps) {
@@ -89,6 +91,27 @@ export function TotalCommitsStep({
         </div>
         <p className="mt-4 text-2xl font-medium text-muted-foreground">
           commits in 2025
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.2, type: "spring", stiffness: 100 }}
+        className="text-center"
+      >
+        <p className="text-lg text-muted-foreground">across</p>
+        <div className="mt-2 flex items-center justify-center gap-3">
+          <FolderGit2 className="h-10 w-10 text-primary" />
+          <CountUp
+            to={totalRepos}
+            duration={2}
+            delay={0.5}
+            className="text-5xl font-bold tracking-tight sm:text-6xl"
+          />
+        </div>
+        <p className="mt-2 text-xl font-medium text-muted-foreground">
+          repositories
         </p>
       </motion.div>
 

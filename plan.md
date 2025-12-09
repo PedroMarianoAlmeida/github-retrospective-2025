@@ -75,6 +75,7 @@
 ---
 
 ## Step 5: Retrospective Steps UI ✅
+
 Use stepper component from react bits
 
 - [x] Design step-by-step navigation (Spotify/Duolingo style)
@@ -86,40 +87,47 @@ Use stepper component from react bits
 - [x] Display first commit of 2025 (date, repo, message)
 - [x] Display last commit of 2025 (date, repo, message)
 - [x] "Your year in code" narrative
-Message: I was a long journey this year, do you remember your first commit?: <first commit data>
+      Message: I was a long journey this year, do you remember your first commit?: <first commit data>
 
 **Route:** `/retrospective/[username]/first-commit`
 
 ### Step 5b: Total Commits ✅
+
 Use Count Up react bits component
+
 - [x] Animated counter
 - [x] Comparison with average user (dynamic from database)
-Message: Since there you create more <total commits> commits
+- [x] Repos
+      Message: Since there you create more <total commits> commits across <total repo> repositories
 
 **Route:** `/retrospective/[username]/total-commits`
 
-### Step 5b: Coding Streak
+### Step 5c: Top Repositories
+
+Use Decrypted Text
+
+- [ ] Top repos by activity
+
+### Step 5c: Top Repositories
+
+### Step 5d: Coding Streak
+
+Use Count Up react bits component
 
 - [ ] Longest consecutive days
 - [ ] Calendar visualization
 
-### Step 5c: Repositories
-
-- [ ] Repos created vs contributed vs forked
-- [ ] Top repos by activity
-
-### Step 5d: Languages
+### Step 5e: Languages
 
 - [ ] Language breakdown chart
 - [ ] Most used language highlight
 
-### Step 5e: Community Impact
+### Step 5f: Community Impact
 
 - [ ] PRs, issues, stars received
 - [ ] Code review comments
 - [ ] Contributions to others' repos
-
-
+- [ ] Forked repos
 
 ### Step 5g: Summary & Comparison
 
