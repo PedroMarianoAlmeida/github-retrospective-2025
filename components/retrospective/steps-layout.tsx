@@ -1,16 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { GitHubUser } from "@/lib/types/github-user";
 import { StepperNavigation } from "./stepper-navigation";
 
 interface StepsLayoutProps {
   children: React.ReactNode;
-  user: GitHubUser;
+  username: string;
 }
-
-const STORAGE_KEY = "github-retrospective-user";
 
 // Define all steps with their routes
 export const STEPS = [
@@ -26,14 +22,9 @@ export const STEPS = [
 
 export type StepSlug = (typeof STEPS)[number]["slug"];
 
-export function StepsLayout({ children, user }: StepsLayoutProps) {
+export function StepsLayout({ children, username }: StepsLayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
-
-  // Store user data in localStorage
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-  }, [user]);
 
   // Get current step index from pathname
   const currentSlug = pathname.split("/").pop() as StepSlug;
@@ -43,7 +34,7 @@ export function StepsLayout({ children, user }: StepsLayoutProps) {
   const handleStepChange = (step: number) => {
     const targetStep = STEPS[step - 1];
     if (targetStep) {
-      router.push(`/retrospective/${user.username}/${targetStep.slug}`);
+      router.push(`/retrospective/${username}/${targetStep.slug}`);
     }
   };
 
@@ -56,7 +47,7 @@ export function StepsLayout({ children, user }: StepsLayoutProps) {
     <div className="min-h-screen bg-background py-8">
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          {user.username}&apos;s 2025
+          {username}&apos;s 2025
         </h1>
         <p className="mt-2 text-muted-foreground">Your year in code</p>
       </div>
@@ -71,17 +62,4 @@ export function StepsLayout({ children, user }: StepsLayoutProps) {
       </StepperNavigation>
     </div>
   );
-}
-
-export function getStoredUser(): GitHubUser | null {
-  if (typeof window === "undefined") return null;
-
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (!stored) return null;
-
-  try {
-    return JSON.parse(stored) as GitHubUser;
-  } catch {
-    return null;
-  }
 }
