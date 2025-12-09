@@ -124,12 +124,14 @@ Use Count Up react bits component
 
 **Route:** `/retrospective/[username]/languages`
 
-### Step 5f: Community Impact
+### Step 5f: Community Impact ✅
 
-- [ ] PRs, issues, stars received
-- [ ] Code review comments
-- [ ] Contributions to others' repos
-- [ ] Forked repos
+- [x] PRs, issues, stars received
+- [x] Code review comments
+- [x] Contributions to others' repos
+- [x] Forked repos
+
+**Route:** `/retrospective/[username]/community`
 
 ### Step 5g: Summary & Comparison
 
