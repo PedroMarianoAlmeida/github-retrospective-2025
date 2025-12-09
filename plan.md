@@ -151,14 +151,15 @@ Use Count Up react bits component
 
 ---
 
-## Step 7: Sharing & Final CTA
+## Step 7: Sharing & Final CTA ✅
 
-- [ ] Generate shareable image/card with stats
-- [ ] Share buttons (Twitter/X, LinkedIn, copy link)
-- [ ] CTA to star the GitHub repo
-- [ ] Option to re-run for different username
+- [x] Share link to summary page with copy button
+- [x] CTA to star the GitHub repo (https://github.com/PedroMarianoAlmeida/github-retrospective-2025)
+- [x] Option to re-run for different username
 
-**Checkpoint: Final review**
+**Route:** `/retrospective/[username]/share`
+
+**Checkpoint: ✅ Complete**
 
 ---
 

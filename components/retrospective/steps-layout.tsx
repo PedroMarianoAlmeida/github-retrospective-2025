@@ -21,6 +21,7 @@ export const STEPS = [
   { slug: "languages", label: "Languages" },
   { slug: "community", label: "Community Impact" },
   { slug: "summary", label: "Summary" },
+  { slug: "share", label: "Share" },
 ] as const;
 
 export type StepSlug = (typeof STEPS)[number]["slug"];
