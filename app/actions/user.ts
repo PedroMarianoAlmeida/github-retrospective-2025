@@ -93,6 +93,54 @@ export async function getAverageCommits(): Promise<number> {
   return result[0]?.avgCommits ?? 0;
 }
 
+export interface AverageStats {
+  totalCommits: number;
+  longestStreak: number;
+  totalPRs: number;
+  totalIssues: number;
+  starsReceived: number;
+  userCount: number;
+}
+
+export async function getAverageStats(): Promise<AverageStats> {
+  const db = await getDatabase();
+  const collection = db.collection<GitHubUser>("gitHubUser");
+
+  const result = await collection
+    .aggregate<{
+      avgCommits: number;
+      avgStreak: number;
+      avgPRs: number;
+      avgIssues: number;
+      avgStars: number;
+      count: number;
+    }>([
+      {
+        $group: {
+          _id: null,
+          avgCommits: { $avg: "$metrics.totalCommits" },
+          avgStreak: { $avg: "$metrics.longestStreak" },
+          avgPRs: { $avg: "$metrics.totalPRs" },
+          avgIssues: { $avg: "$metrics.totalIssues" },
+          avgStars: { $avg: "$metrics.starsReceived" },
+          count: { $sum: 1 },
+        },
+      },
+    ])
+    .toArray();
+
+  const stats = result[0];
+
+  return {
+    totalCommits: Math.round(stats?.avgCommits ?? 0),
+    longestStreak: Math.round(stats?.avgStreak ?? 0),
+    totalPRs: Math.round(stats?.avgPRs ?? 0),
+    totalIssues: Math.round(stats?.avgIssues ?? 0),
+    starsReceived: Math.round(stats?.avgStars ?? 0),
+    userCount: stats?.count ?? 0,
+  };
+}
+
 export async function lookupUser(username: string): Promise<LookupUserResult> {
   const trimmedUsername = username.trim().toLowerCase();
 

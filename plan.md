@@ -133,12 +133,14 @@ Use Count Up react bits component
 
 **Route:** `/retrospective/[username]/community`
 
-### Step 5g: Summary & Comparison
+### Step 5g: Summary & Comparison ✅
 
-- [ ] Overall stats summary
-- [ ] Compare with other users who used the app
+- [x] Overall stats summary
+- [x] Compare with other users who used the app
 
-**Checkpoint: Review each step before proceeding to next**
+**Route:** `/retrospective/[username]/summary`
+
+**Checkpoint: All steps complete!
 
 ---
 

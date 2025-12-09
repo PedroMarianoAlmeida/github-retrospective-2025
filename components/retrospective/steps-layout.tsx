@@ -20,8 +20,7 @@ export const STEPS = [
   { slug: "streak", label: "Coding Streak" },
   { slug: "languages", label: "Languages" },
   { slug: "community", label: "Community Impact" },
-  // Future steps will be added here:
-  // { slug: "summary", label: "Summary" },
+  { slug: "summary", label: "Summary" },
 ] as const;
 
 export type StepSlug = (typeof STEPS)[number]["slug"];
