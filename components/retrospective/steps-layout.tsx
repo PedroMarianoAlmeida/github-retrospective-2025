@@ -47,8 +47,8 @@ export function StepsLayout({ children, user }: StepsLayoutProps) {
   };
 
   const handleComplete = () => {
-    // Navigate to summary or home after completion
-    router.push(`/retrospective/${user.username}/raw`);
+    // Navigate to home after completion
+    router.push("/");
   };
 
   return (

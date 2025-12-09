@@ -144,9 +144,10 @@ Use Count Up react bits component
 
 ---
 
-## Step 6: Cleanup
+## Step 6: Cleanup ✅
 
-- [ ] Remove `/retrospective/[username]/raw` page (debug page for viewing raw database data)
+- [x] Remove `/retrospective/[username]/raw` page (debug page for viewing raw database data)
+- [x] Update handleComplete to navigate to home instead of raw page
 
 ---
 
