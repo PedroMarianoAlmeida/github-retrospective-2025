@@ -74,16 +74,27 @@
 
 ---
 
-## Step 5: Retrospective Steps UI
+## Step 5: Retrospective Steps UI ✅
+Use stepper component from react bits
 
-- [ ] Design step-by-step navigation (Spotify/Duolingo style)
-- [ ] Store fetched data in localStorage for step navigation
-- [ ] Create individual step components:
+- [x] Design step-by-step navigation (Spotify/Duolingo style)
+- [x] Store fetched data in localStorage for step navigation
+- [x] Create individual step components:
 
-### Step 5a: Total Commits
+### Step 5a: First & Last Commit ✅
 
+- [x] Display first commit of 2025 (date, repo, message)
+- [x] Display last commit of 2025 (date, repo, message)
+- [x] "Your year in code" narrative
+Message: I was a long journey this year, do you remember your first commit?: <first commit data>
+
+**Route:** `/retrospective/[username]/first-commit`
+
+### Step 5b: Total Commits
+Use Count Up react bits component
 - [ ] Animated counter
 - [ ] Comparison with average user
+Message: Since there you create more <total commits> commits
 
 ### Step 5b: Coding Streak
 
@@ -106,11 +117,7 @@
 - [ ] Code review comments
 - [ ] Contributions to others' repos
 
-### Step 5f: First & Last Commit
 
-- [ ] Display first commit of 2025 (date, repo, message)
-- [ ] Display last commit of 2025 (date, repo, message)
-- [ ] "Your year in code" narrative
 
 ### Step 5g: Summary & Comparison
 
@@ -121,7 +128,13 @@
 
 ---
 
-## Step 6: Sharing & Final CTA
+## Step 6: Cleanup
+
+- [ ] Remove `/retrospective/[username]/raw` page (debug page for viewing raw database data)
+
+---
+
+## Step 7: Sharing & Final CTA
 
 - [ ] Generate shareable image/card with stats
 - [ ] Share buttons (Twitter/X, LinkedIn, copy link)

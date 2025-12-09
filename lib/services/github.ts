@@ -183,8 +183,16 @@ const USER_STATS_QUERY = `
   }
 `;
 
+const USER_ID_QUERY = `
+  query GetUserId($username: String!) {
+    user(login: $username) {
+      id
+    }
+  }
+`;
+
 const COMMITS_QUERY = `
-  query UserCommits($username: String!, $from: DateTime!, $to: DateTime!) {
+  query UserCommits($username: String!, $userId: ID!, $from: DateTime!, $to: DateTime!, $since: GitTimestamp!, $until: GitTimestamp!) {
     user(login: $username) {
       contributionsCollection(from: $from, to: $to) {
         commitContributionsByRepository(maxRepositories: 100) {
@@ -194,7 +202,7 @@ const COMMITS_QUERY = `
             defaultBranchRef {
               target {
                 ... on Commit {
-                  history(first: 100, since: $from, until: $to, author: {id: null}) {
+                  history(first: 100, since: $since, until: $until, author: {id: $userId}) {
                     nodes {
                       committedDate
                       message
@@ -305,12 +313,22 @@ async function fetchFirstAndLastCommits(
   username: string
 ): Promise<{ first: CommitInfo | null; last: CommitInfo | null }> {
   try {
+    // First, get the user's node ID
+    const userIdResponse = await graphqlWithAuth<{ user: { id: string } }>(
+      USER_ID_QUERY,
+      { username }
+    );
+    const userId = userIdResponse.user.id;
+
     const response = await graphqlWithAuth<CommitsQueryResponse>(
       COMMITS_QUERY,
       {
         username,
+        userId,
         from: YEAR_START,
         to: YEAR_END,
+        since: YEAR_START,
+        until: YEAR_END,
       }
     );
 
